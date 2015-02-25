@@ -1,5 +1,5 @@
-var React = require('react');
-    jQuery = require('jquery'),
+var React = require('react'),
+    jQuery = require('jQuery'),
     BootstrapSlider = require('bootstrap-slider');
 
 var Slider = React.createClass({

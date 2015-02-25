@@ -5,7 +5,7 @@ var merge = require('merge-stream');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify'); 
+var babelify = require('babelify'); 
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
@@ -27,7 +27,9 @@ var env = config.env.dev;
 var runBrowserify = function (watch) {
   var appBundler = browserify({
     entries: ['./src/app/main.jsx'],
-    transform: [reactify], // Convert JSX style
+    transform: [
+      babelify // Convert JSX and ES6
+    ], 
     debug: ! env.isProduction, // Sourcemapping
     cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
   });

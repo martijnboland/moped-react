@@ -1,4 +1,4 @@
-var $ = jQuery = require('jquery');
+global.jQuery = require('jQuery');
 var bs = require('bootstrap');
 
 var React = require('react'); 
