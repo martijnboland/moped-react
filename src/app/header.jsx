@@ -1,18 +1,18 @@
-var React = require('react');
-var Reflux = require('reflux');
-var actions = require('./actions');
+let React = require('react');
+let Reflux = require('reflux');
+let actions = require('./actions');
 
-var Header = React.createClass({
-  toggleSidebar: function (e) {
+let Header = React.createClass({
+  toggleSidebar(e) {
     e.preventDefault();
     actions.toggleSidebar();
   },
-  goBack: function(e) {
+  goBack(e) {
     e.preventDefault();
     window.history.back();
   },
-  render: function() {
-    var backButton;
+  render() {
+    let backButton;
     if (this.props.isBackVisible) {
       backButton = <a href="#" onClick={this.goBack}>Back</a>;
     } else {

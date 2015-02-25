@@ -1,9 +1,9 @@
-var Reflux = require('reflux');
-var actions = require('../actions');
-var mopidyStore = require('./mopidystore');
+let Reflux = require('reflux');
+let actions = require('../actions');
+let mopidyStore = require('./mopidystore');
 
-var mainStore = Reflux.createStore({
-  getInitialState: function () {
+let mainStore = Reflux.createStore({
+  getInitialState() {
     this.appState = {
       isSidebarVisibleForMobile: false,
       isBackVisible: false,
@@ -11,15 +11,15 @@ var mainStore = Reflux.createStore({
     };
     return this.appState;
   },
-  init: function () {
+  init() {
     this.listenTo(mopidyStore, this.onConnectionStateUpdated);
     this.listenTo(actions.toggleSidebar, this.onToggleSidebar);
   },
-  onToggleSidebar: function () {
+  onToggleSidebar() {
     this.appState.isSidebarVisibleForMobile = ! this.appState.isSidebarVisibleForMobile;
     this.trigger(this.appState);
   },
-  onConnectionStateUpdated: function (connectionState) {
+  onConnectionStateUpdated(connectionState) {
     this.appState.connectionState = connectionState;
     this.trigger(this.appState);
   }

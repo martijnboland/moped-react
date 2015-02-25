@@ -1,22 +1,22 @@
-var React = require('react');
-var Reflux = require('reflux');
-var settingsStore = require('./store');
-var settingsActions = require('./actions');
+let React = require('react');
+let Reflux = require('reflux');
+let settingsStore = require('./store');
+let settingsActions = require('./actions');
 
-var Settings = React.createClass({
+let Settings = React.createClass({
   mixins: [Reflux.connect(settingsStore)],
-  handleUrlChange: function (e) {
+  handleUrlChange(e) {
     this.setState({ mopidyUrl: e.target.value });
   },
-  verifyConnection: function (e) {
+  verifyConnection(e) {
     e.preventDefault();
     settingsActions.verifyMopidyUrl(this.state.mopidyUrl);
   },
-  saveSettings: function (e) {
+  saveSettings(e) {
     e.preventDefault();
     settingsActions.save(this.state);
   },
-  render: function () {
+  render() {
     return  (
       <form role="form" onSubmit={this.saveSettings}>
         <h3>Settings</h3>

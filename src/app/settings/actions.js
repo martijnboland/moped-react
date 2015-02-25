@@ -1,6 +1,6 @@
-var Reflux = require('reflux');
+let Reflux = require('reflux');
 
-var Actions = Reflux.createActions({ 
+let Actions = Reflux.createActions({ 
   'verifyMopidyUrl': { asyncResult: true },
   'verifyMopidyUrlReady': {},
   'save': {},

@@ -1,8 +1,8 @@
-var React = require('react'),
+let React = require('react'),
     jQuery = require('jQuery'),
     BootstrapSlider = require('bootstrap-slider');
 
-var Slider = React.createClass({
+let Slider = React.createClass({
 
   propTypes: {
     id: React.PropTypes.string,
@@ -23,8 +23,8 @@ var Slider = React.createClass({
       value: 50,
       toolTip: false,
       width: '200px',
-      onSlide: function () {},
-      onSlideStop: function () {}
+      onSlide() {},
+      onSlideStop() {}
     };
   },
 
@@ -33,11 +33,11 @@ var Slider = React.createClass({
   },
 
   componentDidMount: function() {
-    var toolTip = this.props.toolTip ? 'show' : 'hide';
+    let toolTip = this.props.toolTip ? 'show' : 'hide';
 
-    var domNode = this.getDOMNode();
+    let domNode = this.getDOMNode();
     domNode.style.width = this.props.width;
-    var slider = new BootstrapSlider(domNode, {
+    let slider = new BootstrapSlider(domNode, {
       id: this.props.id,
       min: this.props.min,
       max: this.props.max,
@@ -46,22 +46,22 @@ var Slider = React.createClass({
       tooltip: toolTip
     });
     
-    slider.on('slide', function(event) {
+    slider.on('slide', event => {
       this.props.onSlide(event);
       this.state.slider.setValue(event.value);
-    }.bind(this));
+    });
 
-    slider.on('slideStop', function(event) {
+    slider.on('slideStop', event => {
       this.props.onSlideStop(event);
       this.state.slider.setValue(event.value);
-    }.bind(this));
+    });
 
     this.setState({
       slider: slider
     });
   },
 
-  render: function() {
+  render() {
     return (
       <div className="volume-slider" />
     );

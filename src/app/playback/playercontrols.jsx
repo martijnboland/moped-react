@@ -1,38 +1,38 @@
-var React = require('react');
-var Reflux = require('reflux');
-var _ = require('lodash');
-var Slider = require('../widgets/slider.jsx');
-var actions = require('../actions');
-var playbackStore = require('./playbackstore');
+let React = require('react');
+let Reflux = require('reflux');
+let _ = require('lodash');
+let Slider = require('../widgets/slider.jsx');
+let actions = require('../actions');
+let playbackStore = require('./playbackstore');
 
-var PlayerControls = React.createClass({
+let PlayerControls = React.createClass({
   mixins: [Reflux.connect(playbackStore)],
-  volumeChanged: function (e) {
+  volumeChanged(e) {
     actions.setVolume(e.value);  
   },
-  pause: function (e) {
+  pause(e) {
     e.preventDefault();
     actions.pause();
   },
-  play: function (e) {
+  play(e) {
     e.preventDefault();
     actions.play();
   },
-  prev: function (e) {  
+  prev(e) {  
     e.preventDefault();
     actions.prev();
   },
-  next: function (e) {
+  next(e) {
     e.preventDefault();
     actions.next();
   },
-  toggleRandom: function (e) {
+  toggleRandom(e) {
     e.preventDefault();
     actions.setRandom(! this.state.isRandom);
   },
-  render: function() {
+  render() {
 
-    var playPauseButton = this.state.isPlaying 
+    let playPauseButton = this.state.isPlaying 
       ? <a href="" className="glyphicon glyphicon-pause" role="button" onClick={this.pause}></a>
       : <a href="" className="glyphicon glyphicon-play" role="button" onClick={this.play}></a>
 

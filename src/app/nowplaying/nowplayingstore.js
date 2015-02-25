@@ -1,18 +1,18 @@
-var Reflux = require('reflux');
-var actions = require('../actions');
-var mopidyStore = require('../stores/mopidystore');
-var util = require('../util.js');
-var connectionStates = require('../constants').connectionStates;
+let Reflux = require('reflux');
+let actions = require('../actions');
+let mopidyStore = require('../stores/mopidystore');
+let util = require('../util.js');
+let connectionStates = require('../constants').connectionStates;
 
-var checkPositionTimer;
+let checkPositionTimer;
 
-var nowPlayingStore = Reflux.createStore({
+let nowPlayingStore = Reflux.createStore({
   isSeeking: false,
   defaultTrackImageUrl: 'assets/images/vinyl-icon.png',
-  getInitialState: function () {
+  getInitialState() {
     return this.nowPlayingState;
   },
-  init: function () {
+  init() {
     this.resetState();
     this.listenTo(mopidyStore, this.onConnectionStateUpdated);
     this.listenTo(actions.mopidyCalled, this.onMopidyCalled);
@@ -22,7 +22,7 @@ var nowPlayingStore = Reflux.createStore({
     this.listenTo(actions.seeking, this.onSeeking);
     this.listenTo(actions.seek, this.onSeek);
   },
-  onConnectionStateUpdated: function (connectionState) {
+  onConnectionStateUpdated(connectionState) {
     if (connectionState === connectionStates.online) {
       actions.getPlaybackState();
       actions.getCurrentTrack();
@@ -32,12 +32,12 @@ var nowPlayingStore = Reflux.createStore({
     }
     this.trigger(this.nowPlayingState);
   },
-  onMopidyCalled: function (ev, args) {
-    var self = this;
+  onMopidyCalled(ev, args) {
+    let self = this;
     switch(ev) {
       case 'event:playbackStateChanged':
         if (args.new_state === 'playing') {
-          checkPositionTimer = setInterval(function() {
+          checkPositionTimer = setInterval(() => {
             self.checkTimePosition();
           }, 1000); 
         }
@@ -52,23 +52,23 @@ var nowPlayingStore = Reflux.createStore({
         break;
     }
   },
-  onGetPlaybackStateCompleted: function (state) {
-    var self = this;
+  onGetPlaybackStateCompleted(state) {
+    let self = this;
     if (state === 'playing') {
-      checkPositionTimer = setInterval(function() {
+      checkPositionTimer = setInterval(() => {
           self.checkTimePosition();
         }, 1000);   
     }
   },
-  onUpdateCurrentTrack: function (track) {
+  onUpdateCurrentTrack(track) {
     actions.getTimePosition();
     if (track) {
       this.nowPlayingState.track = track;
       this.trigger(this.nowPlayingState);
     }
   },
-  onUpdateTimePosition: function (timePosition) {
-    var currentTrack = this.nowPlayingState.track;
+  onUpdateTimePosition(timePosition) {
+    let currentTrack = this.nowPlayingState.track;
     if (currentTrack !== null && timePosition !== null && currentTrack.length > 0) {
       this.nowPlayingState.timePosition = (timePosition / currentTrack.length) * 100;
       this.nowPlayingState.trackPosition = util.timeFromMilliSeconds(timePosition);
@@ -80,13 +80,13 @@ var nowPlayingStore = Reflux.createStore({
     }
     this.trigger(this.nowPlayingState);
   },
-  onSeeking: function () {
+  onSeeking() {
     this.isSeeking = true;
   },
-  onSeek: function () {
+  onSeek() {
     this.isSeeking = false;
   },
-  resetState: function () {
+  resetState() {
     this.nowPlayingState = {
       track: {
         name: '',
@@ -97,7 +97,7 @@ var nowPlayingStore = Reflux.createStore({
       albumImageUri: this.defaultTrackImageUrl
     };
   },
-  checkTimePosition: function () {
+  checkTimePosition() {
     if (! this.isSeeking) {
       actions.getTimePosition();
     }

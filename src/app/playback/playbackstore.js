@@ -1,13 +1,13 @@
-var Reflux = require('reflux');
-var actions = require('../actions');
-var mopidyStore = require('../stores/mopidystore');
-var connectionStates = require('../constants').connectionStates;
+let Reflux = require('reflux');
+let actions = require('../actions');
+let mopidyStore = require('../stores/mopidystore');
+let connectionStates = require('../constants').connectionStates;
 
-var playbackStore = Reflux.createStore({
-  getInitialState: function () {
+let playbackStore = Reflux.createStore({
+  getInitialState() {
     return this.playbackState;
   },
-  init: function () {
+  init() {
     this.playbackState = {
       isEnabled: false,
       isPlaying: false,
@@ -20,14 +20,14 @@ var playbackStore = Reflux.createStore({
     this.listenTo(actions.getVolume.completed, this.onGetVolumeCompleted);
     this.listenTo(actions.getRandom.completed, this.onGetRandomCompleted);
   },
-  onConnectionStateUpdated: function (connectionState) {
+  onConnectionStateUpdated(connectionState) {
     this.playbackState.isEnabled = connectionState === connectionStates.online;
     actions.getPlaybackState();
     actions.getVolume();
     actions.getRandom();
     this.trigger(this.playbackState);
   },
-  onMopidyCalled: function (ev, args) {
+  onMopidyCalled(ev, args) {
     switch(ev) {
       case 'event:playbackStateChanged':
         this.playbackState.isPlaying = args.new_state === 'playing';

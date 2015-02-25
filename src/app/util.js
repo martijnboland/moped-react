@@ -1,42 +1,42 @@
-var _ = require('lodash');
+let _ = require('lodash');
 
-var util = {
-  timeFromMilliSeconds: function(length) {
+let util = {
+  timeFromMilliSeconds(length) {
     if (length === undefined) {
       return '';
     }
-    var d = Number(length/1000);
-    var h = Math.floor(d / 3600);
-    var m = Math.floor(d % 3600 / 60);
-    var s = Math.floor(d % 3600 % 60);
+    let d = Number(length/1000);
+    let h = Math.floor(d / 3600);
+    let m = Math.floor(d % 3600 / 60);
+    let s = Math.floor(d % 3600 % 60);
     return ((h > 0 ? h + ":" : "") + (m > 0 ? (h > 0 && m < 10 ? "0" : "") + m + ":" : "0:") + (s < 10 ? "0" : "") + s);
   },
-  getTrackArtistsAsString: function(track) {
+  getTrackArtistsAsString(track) {
     return this.getArtistsAsString(track.artists);
   },
-  getArtistsAsString: function(artists) {
+  getArtistsAsString(artists) {
     return _.map(artists, 'name').join(',');
   },
-  getTrackDuration: function(track) {
+  getTrackDuration(track) {
     return this.timeFromMilliSeconds(track.length);
   },
-  isValidStreamUri: function(uri) {
-    var regexp = /(mms|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  isValidStreamUri(uri) {
+    let regexp = /(mms|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
     return regexp.test(uri);
   },
-  urlEncode: function(textToEncode) {
+  urlEncode(textToEncode) {
     return window.encodeURIComponent(textToEncode);
   },
-  doubleUrlEncode: function(textToEncode) {
+  doubleUrlEncode(textToEncode) {
     return window.encodeURIComponent(window.encodeURIComponent(textToEncode));
   },
-  directoryUrlEncode: function(textToEncode) {
+  directoryUrlEncode(textToEncode) {
     return window.encodeURIComponent(window.encodeURIComponent(textToEncode));
   },
-  urlDecode: function(textToDecode) {
+  urlDecode(textToDecode) {
     return window.decodeURIComponent(textToDecode);
   },
-  doubleUrlDecode: function(textToDecode) {
+  doubleUrlDecode(textToDecode) {
     return window.decodeURIComponent(window.decodeURIComponent(textToDecode));
   }
 };

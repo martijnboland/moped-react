@@ -1,6 +1,6 @@
-var Reflux = require('Reflux');
+let Reflux = require('Reflux');
 
-var actions = Reflux.createActions({
+let actions = Reflux.createActions({
   'toggleSidebar' : {},
 
   'loadPlaylists': { asyncResult: true },

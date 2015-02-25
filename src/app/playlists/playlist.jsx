@@ -1,48 +1,48 @@
-var React = require('react');
-var Reflux = require('reflux');
-var Router = require('react-router');
-var _ = require('lodash');
-var playlistsStore = require('./store');
-var actions = require('../actions');
+let React = require('react');
+let Reflux = require('reflux');
+let Router = require('react-router');
+let _ = require('lodash');
+let playlistsStore = require('./store');
+let actions = require('../actions');
 
-var TrackList = require('../widgets/tracklist.jsx');
+let TrackList = require('../widgets/tracklist.jsx');
 
-var Playlist = React.createClass({
+let Playlist = React.createClass({
   mixins: [
     Reflux.listenTo(playlistsStore, 'onPlaylistsChanged', 'onPlaylistsChanged'),
     Reflux.listenTo(actions.playTrackRequest, 'onPlayTrackRequest'),
     Router.State
   ],
-  getInitialState: function () {
+  getInitialState() {
     return {
       playlists: [],
       currentPlaylistUri: null,
       currentPlaylist: null
     }
   },
-  componentWillMount: function () {
+  componentWillMount() {
     this.loadPlaylist();
   },
-  componentWillReceiveProps: function () {
+  componentWillReceiveProps() {
     this.loadPlaylist();
   },
-  onPlaylistsChanged: function (playlists) {
-    var currentPlaylist = _.find(playlists, { uri: this.state.currentPlaylistUri });
+  onPlaylistsChanged(playlists) {
+    let currentPlaylist = _.find(playlists, { uri: this.state.currentPlaylistUri });
     this.setState({ playlists: playlists, currentPlaylist: currentPlaylist })
   },
-  onPlayTrackRequest: function (track) {
-    var surroundingTracks = this.state.currentPlaylist ? this.state.currentPlaylist.tracks : [];
+  onPlayTrackRequest(track) {
+    let surroundingTracks = this.state.currentPlaylist ? this.state.currentPlaylist.tracks : [];
     actions.playTrack(track, surroundingTracks);
   },
-  loadPlaylist: function () {
-    var uri = this.getParams().uri;
-    var currentPlaylist = null;
+  loadPlaylist() {
+    let uri = this.getParams().uri;
+    let currentPlaylist = null;
     if (this.state.playlists.length > 0) {
       currentPlaylist = _.find(this.state.playlists, { uri: uri });
     }
     this.setState({ currentPlaylistUri: uri, currentPlaylist: currentPlaylist });
   },
-  render: function () {
+  render() {
     if (this.state.currentPlaylist) {
       return (
         <div>

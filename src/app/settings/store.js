@@ -1,43 +1,41 @@
-var Reflux = require('reflux');
-var Mopidy = require('mopidy');
-var SettingsActions = require('./actions');
+let Reflux = require('reflux');
+let Mopidy = require('mopidy');
+let SettingsActions = require('./actions');
 
-var settingsKey = 'moped:settings';
+let settingsKey = 'moped:settings';
 
-var settingsStore = Reflux.createStore({
-  init: function () {
+let settingsStore = Reflux.createStore({
+  init() {
     this.listenToMany(SettingsActions);
   },
-  onVerifyMopidyUrl: function (mopidyUrl) {
-    var mopidy = new Mopidy({ 
+  onVerifyMopidyUrl(mopidyUrl) {
+    let mopidy = new Mopidy({ 
       autoConnect: false,
       webSocketUrl: mopidyUrl
     });
     mopidy.on(console.log.bind(console));
-    mopidy.on('state:online', function() {
-      window.alert('Connection successful.');
-    });
-    mopidy.on('websocket:error', function(error) {
+    mopidy.on('state:online', () => window.alert('Connection successful.'));
+    mopidy.on('websocket:error', error => {
       console.log(error);
       window.alert('Unable to connect to Mopidy server. Check if the url is correct.');
     });
 
     mopidy.connect();
 
-    setTimeout(function() {
+    setTimeout(() => {
       mopidy.close();
       mopidy.off();
       mopidy = null;
       console.log('Mopidy closed.');
     }, 1000);
   },
-  onSave: function (settings) {
+  onSave(settings) {
     this.settings = settings;
     window.localStorage[settingsKey] = JSON.stringify(this.settings);
     window.alert('Settings saved');
     this.trigger(this.settings);
   },
-  getInitialState: function () {
+  getInitialState() {
     if (window.localStorage[settingsKey]) {
       this.settings = JSON.parse(window.localStorage[settingsKey]);
     }

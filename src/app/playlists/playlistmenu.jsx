@@ -1,27 +1,25 @@
-var React = require('react');
-var Reflux = require('reflux');
-var Link = require('react-router').Link;
-var _ = require('lodash');
-var playlistsStore = require('./store');
+let React = require('react');
+let Reflux = require('reflux');
+let Link = require('react-router').Link;
+let _ = require('lodash');
+let playlistsStore = require('./store');
 
-var ensureFolderExists = function (folderPaths, processedPlaylists) {
+let ensureFolderExists = function (folderPaths, processedPlaylists) {
   // Check if a compatible folder exists in processedPlaylists. If not, create and return it.
-  var currentFolder = null;
-  _.forEach(folderPaths, function (folderPath) {
+  let currentFolder = null;
+  _.forEach(folderPaths, folderPath => {
     if (currentFolder === null) {
-      currentFolder = _.find(processedPlaylists, function (playlistItem) {
-        return playlistItem.hasOwnProperty('items') && playlistItem.name === folderPath;
-      });
+      currentFolder = _.find(processedPlaylists, playlistItem =>
+        playlistItem.hasOwnProperty('items') && playlistItem.name === folderPath);
       if (! currentFolder) {
         currentFolder = { name: folderPath, items: [], expanded: false };
         processedPlaylists.push(currentFolder);
       }
     }
     else {
-      var previousFolder = currentFolder;
-      currentFolder = _.find(previousFolder.items, function (playlistItem) {
-        return playlistItem.hasOwnProperty('items') && playlistItem.name === folderPath;
-      });
+      let previousFolder = currentFolder;
+      currentFolder = _.find(previousFolder.items, playlistItem => 
+        playlistItem.hasOwnProperty('items') && playlistItem.name === folderPath);
       if (! currentFolder) {
         currentFolder = { name: folderPath, items: [], expanded: false };
         previousFolder.items.push(currentFolder);
@@ -31,17 +29,17 @@ var ensureFolderExists = function (folderPaths, processedPlaylists) {
   return currentFolder;
 };
 
-var processPlaylists = function (playlists) {
-  var processedPlaylists = [];
+let processPlaylists = function (playlists) {
+  let processedPlaylists = [];
   // Extract playlist folders from playlist names ('/' is the separator) and shove the playlist into
   // the right folders.
-  _.forEach(playlists, function (playlist) {
-    var paths = playlist.name.split('/');
+  _.forEach(playlists, playlist => {
+    let paths = playlist.name.split('/');
     if (paths.length > 1) {
       // Folders, last item in array is the playlist name
-      var playlistInFolder = _.cloneDeep(playlist);
+      let playlistInFolder = _.cloneDeep(playlist);
       playlistInFolder.name = paths.pop();
-      var folder = ensureFolderExists(paths, processedPlaylists);
+      let folder = ensureFolderExists(paths, processedPlaylists);
       folder.items.push(playlistInFolder);
     }
     else {
@@ -52,26 +50,26 @@ var processPlaylists = function (playlists) {
   return processedPlaylists;
 };
 
-var PlaylistFolder = React.createClass({
-  getInitialState: function () {
+let PlaylistFolder = React.createClass({
+  getInitialState() {
     return {
       isExpanded: false
     }
   },
-  toggle: function (e) {
+  toggle(e) {
     e.preventDefault();
     this.setState({ isExpanded: ! this.state.isExpanded });
   },
-  render: function () {
+  render() {
     
-    var folderItems = (function () {
+    let folderItems = () => {
       if (this.state.isExpanded) {
         return <PlaylistList items={this.props.folder.items}/>
       }
       else {
         return null;
       }
-    }).bind(this);
+    };
 
     return (
       <div>
@@ -82,8 +80,8 @@ var PlaylistFolder = React.createClass({
   }
 });
 
-var PlaylistItem = React.createClass({
-  render: function () {
+let PlaylistItem = React.createClass({
+  render() {
     return (
       <li className="list-group-item">
         <Link to="playlist" params={{uri: this.props.playlist.uri}}><span className="glyphicon glyphicon-music"></span> {this.props.playlist.name}</Link>
@@ -92,10 +90,10 @@ var PlaylistItem = React.createClass({
   }
 });
 
-var PlaylistList = React.createClass({
-  render: function() {
+let PlaylistList = React.createClass({
+  render() {
 
-    var createItem = function(item) {
+    let createItem = item => {
       if (item.items) {
         return <PlaylistFolder key={item.name} folder={item}/>
       } else {
@@ -111,17 +109,17 @@ var PlaylistList = React.createClass({
   }
 });
 
-var PlaylistMenu = React.createClass({
+let PlaylistMenu = React.createClass({
   mixins: [Reflux.listenTo(playlistsStore,"onPlaylistsChanged")],
-  getInitialState: function () {
+  getInitialState() {
     return {
       playlists: []
     }
   },
-  onPlaylistsChanged: function (playlists) {
+  onPlaylistsChanged(playlists) {
     this.setState({ playlists: processPlaylists(playlists) });
   },
-  render: function() {
+  render() {
     return (      
       <div className="panel">
         <div className="panel-heading playlists">Playlists</div>

@@ -1,35 +1,35 @@
-var React = require('react');
-var Reflux = require('reflux');
-var actions = require('../actions');
-var util = require('../util');
+let React = require('react');
+let Reflux = require('reflux');
+let actions = require('../actions');
+let util = require('../util');
 
-var Track = React.createClass({
+let Track = React.createClass({
   mixins: [Reflux.listenTo(actions.mopidyCalled, 'onMopidyCalled')],
   propTypes: {
     track: React.PropTypes.object.isRequired
   },
-  getInitialState: function () {
+  getInitialState() {
     return {
       isPlaying: false
     }
   },
-  componentWillReceiveProps: function () {
+  componentWillReceiveProps() {
     this.setState({ isPlaying: false })
   },
-  getTrackProvider: function (track) {
-    var provider = track.uri.split(':')[0];
+  getTrackProvider(track) {
+    let provider = track.uri.split(':')[0];
     return (provider.charAt(0).toUpperCase() + provider.slice(1));
   },
-  play: function (e) {
+  play(e) {
     e.preventDefault();
     actions.playTrackRequest(this.props.track);
   },
-  onMopidyCalled: function (ev, args) {
+  onMopidyCalled(ev, args) {
     if (ev === 'event:trackPlaybackStarted' || ev === 'event:trackPlaybackPaused') {
       this.setState({ isPlaying: args.tl_track.track.uri === this.props.track.uri });
     }
   },
-  render: function() {
+  render() {
     return (
       <a href="" className={'list-group-item row' + (this.state.isPlaying ? ' active' : '')} onClick={this.play}>
         <div className="col-xs-1">{this.props.trackNo}</div>
@@ -49,13 +49,13 @@ var Track = React.createClass({
 
 });
 
-var TrackList = React.createClass({
+let TrackList = React.createClass({
   propTypes: {
     tracks: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
   },
-  render: function() {
+  render() {
 
-    var createTrack = function (track, idx) {
+    let createTrack = function (track, idx) {
       return <Track key={idx} trackNo={idx + 1} track={track}/>
     }
 

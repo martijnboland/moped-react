@@ -1,7 +1,7 @@
-var React = require('react'); 
+let React = require('react'); 
 
-var Home = React.createClass({
-  render: function () {
+let Home = React.createClass({
+  render() {
     return  (
       <div>
         <h3>Moped</h3>

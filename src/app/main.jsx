@@ -1,29 +1,29 @@
 global.jQuery = require('jQuery');
-var bs = require('bootstrap');
+let bs = require('bootstrap');
 
-var React = require('react'); 
-var Reflux = require('reflux');
-var Router = require('react-router');
+let React = require('react'); 
+let Reflux = require('reflux');
+let Router = require('react-router');
 
-var DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+let DefaultRoute = Router.DefaultRoute;
+let Link = Router.Link;
+let Route = Router.Route;
+let RouteHandler = Router.RouteHandler;
 
-var Header = require('./header.jsx');
-var NowPlaying = require('./nowplaying/nowplaying.jsx')
-var PlayerControls = require('./playback/playercontrols.jsx');
-var PlaylistMenu = require('./playlists/playlistmenu.jsx')
+let Header = require('./header.jsx');
+let NowPlaying = require('./nowplaying/nowplaying.jsx')
+let PlayerControls = require('./playback/playercontrols.jsx');
+let PlaylistMenu = require('./playlists/playlistmenu.jsx')
 
-var Home = require('./home.jsx');
-var Playlist = require('./playlists/playlist.jsx')
-var Settings = require('./settings/settings.jsx');
+let Home = require('./home.jsx');
+let Playlist = require('./playlists/playlist.jsx')
+let Settings = require('./settings/settings.jsx');
 
-var MainStore = require('./stores/mainstore');
+let MainStore = require('./stores/mainstore');
 
-var Main = React.createClass({
+let Main = React.createClass({
   mixins: [Reflux.connect(MainStore)],
-  render: function () {
+  render() {
     return  (
       <div id="applicationhost">
         <aside id="menu" className="menu pane-col scroll-y">
@@ -59,7 +59,7 @@ var Main = React.createClass({
   }
 });
 
-var routes = (
+let routes = (
   <Route name="main" path="/" handler={Main}>
     <Route name="playlist" path="playlist/:uri" handler={Playlist}/>
     <Route name="settings" handler={Settings}/>
