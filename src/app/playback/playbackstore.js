@@ -1,7 +1,7 @@
-let Reflux = require('reflux');
-let actions = require('../actions');
-let mopidyStore = require('../stores/mopidystore');
-let connectionStates = require('../constants').connectionStates;
+import Reflux from 'reflux';
+import actions from '../actions';
+import mopidyStore from '../stores/mopidystore';
+import { connectionStates } from '../constants';
 
 let playbackStore = Reflux.createStore({
   getInitialState() {
@@ -53,4 +53,4 @@ let playbackStore = Reflux.createStore({
   }
 });
 
-module.exports = playbackStore;
+export default playbackStore;

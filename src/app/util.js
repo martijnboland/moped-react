@@ -1,4 +1,4 @@
-let _ = require('lodash');
+import _ from 'lodash';
 
 let util = {
   timeFromMilliSeconds(length) {
@@ -41,4 +41,4 @@ let util = {
   }
 };
 
-module.exports = util;
+export default util;

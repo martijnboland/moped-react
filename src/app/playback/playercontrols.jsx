@@ -1,9 +1,9 @@
-let React = require('react');
-let Reflux = require('reflux');
-let _ = require('lodash');
-let Slider = require('../widgets/slider.jsx');
-let actions = require('../actions');
-let playbackStore = require('./playbackstore');
+import React from 'react';
+import Reflux from 'reflux';
+import _ from 'lodash';
+import Slider from '../widgets/slider.jsx';
+import actions from '../actions';
+import playbackStore from './playbackstore';
 
 let PlayerControls = React.createClass({
   mixins: [Reflux.connect(playbackStore)],
@@ -54,4 +54,4 @@ let PlayerControls = React.createClass({
 
 });
 
-module.exports = PlayerControls;
+export default PlayerControls;

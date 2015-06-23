@@ -1,6 +1,6 @@
-let Reflux = require('reflux');
-let Mopidy = require('mopidy');
-let SettingsActions = require('./actions');
+import Reflux from 'reflux';
+import Mopidy from 'mopidy';
+import SettingsActions from './actions';
 
 let settingsKey = 'moped:settings';
 
@@ -46,4 +46,4 @@ let settingsStore = Reflux.createStore({
   }
 });
 
-module.exports = settingsStore;
+export default settingsStore;

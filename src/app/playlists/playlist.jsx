@@ -1,11 +1,11 @@
-let React = require('react');
-let Reflux = require('reflux');
-let Router = require('react-router');
-let _ = require('lodash');
-let playlistsStore = require('./store');
-let actions = require('../actions');
+import React from 'react';
+import Reflux from 'reflux';
+import Router from 'react-router';
+import _ from 'lodash';
+import playlistsStore from './store';
+import actions from '../actions';
 
-let TrackList = require('../widgets/tracklist.jsx');
+import TrackList from '../widgets/tracklist.jsx';
 
 let Playlist = React.createClass({
   mixins: [
@@ -60,4 +60,4 @@ let Playlist = React.createClass({
   }
 });
 
-module.exports = Playlist;
+export default Playlist;

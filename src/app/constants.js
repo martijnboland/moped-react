@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 
   connectionStates: {
     online: 'Online',

@@ -1,8 +1,8 @@
-let Reflux = require('reflux');
-let actions = require('../actions');
-let mopidyStore = require('../stores/mopidystore');
-let util = require('../util.js');
-let connectionStates = require('../constants').connectionStates;
+import Reflux from 'reflux';
+import actions from '../actions';
+import mopidyStore from '../stores/mopidystore';
+import util from '../util.js';
+import { connectionStates } from '../constants';
 
 let checkPositionTimer;
 
@@ -104,4 +104,4 @@ let nowPlayingStore = Reflux.createStore({
   }
 });
 
-module.exports = nowPlayingStore;
+export default nowPlayingStore;

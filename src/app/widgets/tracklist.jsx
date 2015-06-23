@@ -1,7 +1,7 @@
-let React = require('react');
-let Reflux = require('reflux');
-let actions = require('../actions');
-let util = require('../util');
+import React from 'react';
+import Reflux from 'reflux';
+import actions from '../actions';
+import util from '../util';
 
 let Track = React.createClass({
   mixins: [Reflux.listenTo(actions.mopidyCalled, 'onMopidyCalled')],
@@ -68,4 +68,4 @@ let TrackList = React.createClass({
 
 });
 
-module.exports = TrackList;
+export default TrackList;

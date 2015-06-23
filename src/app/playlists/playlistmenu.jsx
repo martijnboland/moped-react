@@ -1,8 +1,8 @@
-let React = require('react');
-let Reflux = require('reflux');
-let Link = require('react-router').Link;
-let _ = require('lodash');
-let playlistsStore = require('./store');
+import React from 'react';
+import Reflux from 'reflux';
+import { Link } from 'react-router';
+import _ from 'lodash';
+import playlistsStore from './store';
 
 let ensureFolderExists = function (folderPaths, processedPlaylists) {
   // Check if a compatible folder exists in processedPlaylists. If not, create and return it.
@@ -131,4 +131,4 @@ let PlaylistMenu = React.createClass({
   }
 });
 
-module.exports = PlaylistMenu;
+export default PlaylistMenu;

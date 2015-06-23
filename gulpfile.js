@@ -26,13 +26,13 @@ var env = config.env.dev;
 
 var runBrowserify = function (watch) {
   var appBundler = browserify({
-    entries: ['./src/app/main.jsx'],
-    transform: [
-      babelify // Convert JSX and ES6
-    ], 
     debug: ! env.isProduction, // Sourcemapping
-    cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+    entries: ['./src/app/main.jsx'],
+    cache: {}, 
+    packageCache: {}, 
+    fullPaths: true // Requirement of watchify
   });
+  appBundler.transform(babelify);
   appBundler.external(! env.isProduction ? config.vendorNpmPackages : []);
   
   if (watch) {

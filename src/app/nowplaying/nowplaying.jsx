@@ -1,11 +1,11 @@
-var React = require('react');
-var Reflux = require('reflux');
-var Slider = require('../widgets/slider.jsx');
-var actions = require('../actions');
-var nowPlayingStore = require('./nowplayingstore');
-var util = require('../util');
+import React from 'react';
+import Reflux from 'reflux';
+import Slider from '../widgets/slider.jsx';
+import actions from '../actions';
+import nowPlayingStore from './nowplayingstore';
+import util from '../util';
 
-var CurrentTrack = React.createClass({
+let CurrentTrack = React.createClass({
   propTypes: {
     track: React.PropTypes.object.isRequired
   },
@@ -28,7 +28,7 @@ var CurrentTrack = React.createClass({
   }
 });
 
-var TrackPosition = React.createClass({
+let TrackPosition = React.createClass({
   propTypes: {
     trackPosition: React.PropTypes.string,
     trackLength: React.PropTypes.number
@@ -60,7 +60,7 @@ var TrackPosition = React.createClass({
   }
 });
 
-var NowPlaying = React.createClass({
+let NowPlaying = React.createClass({
   mixins: [Reflux.connect(nowPlayingStore)],
   render: function() {
 
@@ -75,4 +75,4 @@ var NowPlaying = React.createClass({
   }
 });
 
-module.exports = NowPlaying;
+export default NowPlaying;

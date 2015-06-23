@@ -55,17 +55,17 @@ let mopidyStore = Reflux.createStore({
       let currentTrackUris = _.map(this.currentTlTracks, tlTrack => tlTrack.track.uri);
       if (_.difference(trackUris, currentTrackUris).length === 0) {
         // no playlist change required, just play a different track.
-        this.mopidy.playback.stop({ clear_current_track: false })
+        this.mopidy.playback.stop()
           .then(() => {
             let tlTrackToPlay = _.find(this.currentTlTracks, tlTrack => tlTrack.track.uri === track.uri);
-            this.mopidy.playback.changeTrack({ tl_track: tlTrackToPlay })
+            this.mopidy.playback.play({ tl_track: tlTrackToPlay })
               .then(() => this.mopidy.playback.play());
           });
         return;
       }
     }
 
-    this.mopidy.playback.stop({ clear_current_track: true })
+    this.mopidy.playback.stop()
       .then(() => {
         this.mopidy.tracklist.clear();
       }, consoleError)
@@ -77,7 +77,7 @@ let mopidyStore = Reflux.createStore({
           .then(tlTracks => {
             this.currentTlTracks = tlTracks;
             let tlTrackToPlay = _.find(tlTracks, (tlTrack) => tlTrack.track.uri === track.uri);
-            this.mopidy.playback.changeTrack({ tl_track: tlTrackToPlay })
+            this.mopidy.playback.play({ tl_track: tlTrackToPlay })
               .then(() => {
                 this.mopidy.playback.play();
               });

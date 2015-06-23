@@ -1,7 +1,7 @@
-var Reflux = require('reflux');
-var actions = require('../actions');
+import Reflux from 'reflux';
+import actions from '../actions';
 
-var store = Reflux.createStore({
+let store = Reflux.createStore({
   init: function () {
     this.listenTo(actions.mopidyCalled, this.onMopidyCalled);
     this.listenTo(actions.loadPlaylists.completed, this.onPlaylistsLoaded);
@@ -20,4 +20,4 @@ var store = Reflux.createStore({
   }
  });
 
-module.exports = store;
+export default store;

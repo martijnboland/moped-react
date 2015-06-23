@@ -1,4 +1,4 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
 
 let Actions = Reflux.createActions({ 
   'verifyMopidyUrl': { asyncResult: true },
@@ -7,4 +7,4 @@ let Actions = Reflux.createActions({
   'saved': {}
 });
 
-module.exports = Actions;
+export default Actions;

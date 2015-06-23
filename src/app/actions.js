@@ -1,4 +1,4 @@
-let Reflux = require('Reflux');
+import Reflux from 'Reflux';
 
 let actions = Reflux.createActions({
   'toggleSidebar' : {},
@@ -27,4 +27,4 @@ let actions = Reflux.createActions({
   'seeking' : {}
 });
 
-module.exports = actions;
+export default actions;

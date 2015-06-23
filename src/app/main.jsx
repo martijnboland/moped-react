@@ -1,25 +1,21 @@
 global.jQuery = require('jQuery');
-let bs = require('bootstrap');
 
-let React = require('react'); 
-let Reflux = require('reflux');
-let Router = require('react-router');
+import bs from 'bootstrap';
 
-let DefaultRoute = Router.DefaultRoute;
-let Link = Router.Link;
-let Route = Router.Route;
-let RouteHandler = Router.RouteHandler;
+import React from 'react'; 
+import Reflux from 'reflux';
+import { default as Router, DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
-let Header = require('./header.jsx');
-let NowPlaying = require('./nowplaying/nowplaying.jsx')
-let PlayerControls = require('./playback/playercontrols.jsx');
-let PlaylistMenu = require('./playlists/playlistmenu.jsx')
+import Header from './header.jsx';
+import NowPlaying from './nowplaying/nowplaying.jsx';
+import PlayerControls from './playback/playercontrols.jsx';
+import PlaylistMenu from './playlists/playlistmenu.jsx';
 
-let Home = require('./home.jsx');
-let Playlist = require('./playlists/playlist.jsx')
-let Settings = require('./settings/settings.jsx');
+import Home from './home.jsx';
+import Playlist from './playlists/playlist.jsx';
+import Settings from './settings/settings.jsx';
 
-let MainStore = require('./stores/mainstore');
+import MainStore from './stores/mainstore';
 
 let Main = React.createClass({
   mixins: [Reflux.connect(MainStore)],
@@ -71,4 +67,4 @@ Router.run(routes, function (Handler) {
   React.render(<Handler/>, document.body);
 });
 
-module.exports = Main;
+export default Main;

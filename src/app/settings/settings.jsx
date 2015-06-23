@@ -1,7 +1,7 @@
-let React = require('react');
-let Reflux = require('reflux');
-let settingsStore = require('./store');
-let settingsActions = require('./actions');
+import React from 'react';
+import Reflux from 'reflux';
+import settingsStore from './store';
+import settingsActions from './actions';
 
 let Settings = React.createClass({
   mixins: [Reflux.connect(settingsStore)],
@@ -36,5 +36,4 @@ let Settings = React.createClass({
   }
 });
 
-
-module.exports = Settings;
+export default Settings;

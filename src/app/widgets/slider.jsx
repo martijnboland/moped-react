@@ -1,6 +1,6 @@
-let React = require('react'),
-    jQuery = require('jQuery'),
-    BootstrapSlider = require('bootstrap-slider');
+import React from 'react';
+import jQuery from 'jQuery';
+import BootstrapSlider from 'bootstrap-slider';
 
 let Slider = React.createClass({
 
@@ -68,4 +68,4 @@ let Slider = React.createClass({
   }
 });
 
-module.exports = Slider;
+export default Slider;

@@ -1,6 +1,6 @@
-let Reflux = require('reflux');
-let actions = require('../actions');
-let mopidyStore = require('./mopidystore');
+import Reflux from 'reflux';
+import actions from '../actions';
+import mopidyStore from './mopidystore';
 
 let mainStore = Reflux.createStore({
   getInitialState() {
@@ -25,4 +25,4 @@ let mainStore = Reflux.createStore({
   }
 });
 
-module.exports = mainStore;
+export default mainStore;

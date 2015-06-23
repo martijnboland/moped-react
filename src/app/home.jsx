@@ -1,4 +1,4 @@
-let React = require('react'); 
+import React from 'react'; 
 
 let Home = React.createClass({
   render() {
@@ -20,4 +20,4 @@ let Home = React.createClass({
   }
 });
 
-module.exports = Home;
+export default Home;

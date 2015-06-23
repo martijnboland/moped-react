@@ -1,6 +1,6 @@
-let React = require('react');
-let Reflux = require('reflux');
-let actions = require('./actions');
+import React from 'react';
+import Reflux from 'reflux';
+import actions from './actions';
 
 let Header = React.createClass({
   toggleSidebar(e) {
@@ -39,4 +39,4 @@ let Header = React.createClass({
   }
 });
 
-module.exports = Header;
+export default Header;
